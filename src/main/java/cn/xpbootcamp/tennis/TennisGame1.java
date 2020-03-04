@@ -23,51 +23,38 @@ public class TennisGame1 implements TennisGame {
     }
 
     private void updateScore(){
-        score = "";
-        int tempScore = 0;
-        if (player1.getPoint() == player2.getPoint()) {
-            switch (player1.getPoint()) {
+        int p1_point = player1.getPoint();
+        int p2_point = player2.getPoint();
+        if(Math.max(p1_point,p2_point) > 3){
+            switch (p1_point - p2_point){
                 case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
                     score = "Deuce";
                     break;
-
+                case 1:
+                    score = "Advantage player1";
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    score = "Win for player1";
+                    break;
+                case -1:
+                    score = "Advantage player2";
+                    break;
+                case -2:
+                case -3:
+                case -4:
+                    score = "Win for player2";
+                    break;
             }
-        } else if (player1.getPoint() >= 4 || player2.getPoint() >= 4) {
-            int minusResult = player1.getPoint() - player2.getPoint();
-            if (minusResult == 1) score = "Advantage player1";
-            else if (minusResult == -1) score = "Advantage player2";
-            else if (minusResult >= 2) score = "Win for player1";
-            else score = "Win for player2";
-        } else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) tempScore = player1.getPoint();
-                else {
-                    score += "-";
-                    tempScore = player2.getPoint();
-                }
-                switch (tempScore) {
-                    case 0:
-                        score += "Love";
-                        break;
-                    case 1:
-                        score += "Fifteen";
-                        break;
-                    case 2:
-                        score += "Thirty";
-                        break;
-                    case 3:
-                        score += "Forty";
-                        break;
-                }
+        }else{
+            String[] point = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+            if(p1_point == p2_point && p1_point == 3){
+                score = "Deuce";
+            }else{
+                score = point[p1_point];
+                score += "-";
+                score += p1_point == p2_point ? "All" : point[p2_point];
             }
         }
     }
