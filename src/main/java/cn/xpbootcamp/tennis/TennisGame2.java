@@ -127,8 +127,8 @@ public class TennisGame2 implements TennisGame
         P2point++;
     }
 
-    public void wonPoint(String player) {
-        if (player == "player1")
+    public void wonPoint(int playerNum) {
+        if (playerNum == 1)
             P1Score();
         else
             P2Score();
