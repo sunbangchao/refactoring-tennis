@@ -7,6 +7,13 @@ public class TennisGame1 implements TennisGame {
 
     private String score;
 
+    private static final String[] pointString = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+    private static final String DUECE = "Duece";
+    private static final String P1_WIN = "Win for player1";
+    private static final String P2_WIN = "Win for player2";
+    private static final String P1_ADVANTAGE = "Advantage player1";
+    private static final String P2_ADVANTAGE = "Advantage player2";
+
     public TennisGame1(String player1Name, String player2Name) {
         this.player1 = new Player(player1Name);
         this.player2 = new Player(player2Name);
@@ -28,33 +35,32 @@ public class TennisGame1 implements TennisGame {
         if(Math.max(p1_point,p2_point) > 3){
             switch (p1_point - p2_point){
                 case 0:
-                    score = "Deuce";
+                    score = DUECE;
                     break;
                 case 1:
-                    score = "Advantage player1";
+                    score = P1_ADVANTAGE;
                     break;
                 case 2:
                 case 3:
                 case 4:
-                    score = "Win for player1";
+                    score = P1_WIN;
                     break;
                 case -1:
-                    score = "Advantage player2";
+                    score = P2_ADVANTAGE;
                     break;
                 case -2:
                 case -3:
                 case -4:
-                    score = "Win for player2";
+                    score = P2_WIN;
                     break;
             }
         }else{
-            String[] point = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
             if(p1_point == p2_point && p1_point == 3){
-                score = "Deuce";
+                score = DUECE;
             }else{
-                score = point[p1_point];
+                score = pointString[p1_point];
                 score += "-";
-                score += p1_point == p2_point ? "All" : point[p2_point];
+                score += p1_point == p2_point ? "All" : pointString[p2_point];
             }
         }
     }
