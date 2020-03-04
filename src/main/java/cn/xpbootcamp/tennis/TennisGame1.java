@@ -10,6 +10,7 @@ public class TennisGame1 implements TennisGame {
     public TennisGame1(String player1Name, String player2Name) {
         this.player1 = new Player(player1Name);
         this.player2 = new Player(player2Name);
+        updateScore();
     }
 
     public void wonPoint(int playerNum) {
@@ -18,10 +19,11 @@ public class TennisGame1 implements TennisGame {
         }else{
             player2.wonPoint();
         }
+        updateScore();
     }
 
-    public String getScore() {
-        String score = "";
+    private void updateScore(){
+        score = "";
         int tempScore = 0;
         if (player1.getPoint() == player2.getPoint()) {
             switch (player1.getPoint()) {
@@ -68,6 +70,9 @@ public class TennisGame1 implements TennisGame {
                 }
             }
         }
-        return score;
+    }
+
+    public String getScore() {
+        return this.score;
     }
 }
